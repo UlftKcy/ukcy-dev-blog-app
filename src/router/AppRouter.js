@@ -5,6 +5,8 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import NewBlog from "../pages/NewBlog";
 import BlogDetail from "../pages/BlogDetail";
+import UpdateBlog from "../pages/UpdateBlog";
+import Profile from "../pages/Profile";
 
 const AppRouter = () => {
   return (
@@ -16,6 +18,8 @@ const AppRouter = () => {
         <Route path="/register" component={Register} />
         <Route path="/newblog" component={NewBlog} />
         <Route path="/blog/:blogId" component={BlogDetail} />
+        <Route path="/updateBlog" component={UpdateBlog} />
+        <Route path="/profile" component={Profile} />
       </Switch>
     </Router>
   );

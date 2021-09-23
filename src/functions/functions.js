@@ -19,7 +19,25 @@ export const useFetch = () => {
         blogCardArray.push({ id, ...blogCards[id] });
       }
       setBlogCardList(blogCardArray);
+      // console.log(blogCardArray)
     });
   }, []);
   return { blogCardList };
+};
+
+export const editHandler = (updateCard) => {
+  const blogCardRef = firebase.database().ref("blogCard").child(updateCard.id);
+  blogCardRef.update({
+    title: updateCard.title,
+    image: updateCard.image,
+    content: updateCard.content,
+  });
+};
+
+export const deleteHandler = (id) => {
+  const blogCardRef = firebase.database().ref("blogCard").child(id);
+  blogCardRef.remove();
+  // console.log("id: ", id)
+  /* const blogCardRef = firebase.database().ref("blogCard").child(newCard.id);
+  blogCardRef.update(newCard) */
 };

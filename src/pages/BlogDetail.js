@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import {
   Grid,
   Card,
@@ -7,23 +9,26 @@ import {
   CardActions,
   Button,
   Box,
-  ButtonGroup,
 } from "@material-ui/core";
 import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
 import ModeCommentOutlinedIcon from "@material-ui/icons/ModeCommentOutlined";
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import DeleteIcon from "@material-ui/icons/Delete";
+import UpdateIcon from "@material-ui/icons/Update";
+import { Link } from "react-router-dom";
+import {deleteHandler} from "../functions/functions";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 const BlogDetail = () => {
-  const { selectedCard } = useContext(AuthContext);
-  const { title, image, content } = selectedCard;
+  const { selectedCard , currentUser} = useContext(AuthContext);
+  const { id,title, image, content } = selectedCard;
   return (
-    <Grid sx={{ flexGrow: 1 }} container spacing={8}>
+    <Grid sx={{ flexGrow: 1 }} container>
       <Grid item xs={12}>
         <Grid container justifyContent="space-around" spacing={8}>
           <Typography variant="h3" color="secondary" component="div">
             <Box sx={{ fontFamily: "Monospace", m: 3 }}>DETAILS</Box>
           </Typography>
+
           <Grid item>
             <Card
               fluid
@@ -58,6 +63,15 @@ const BlogDetail = () => {
                   {content}
                 </Typography>
               </CardContent>
+              <CardContent
+                      style={{
+                        display: "flex",
+                        fontSize:20,
+                        marginBottom:10
+                      }}
+                    >
+                        <AccountCircleIcon/>{currentUser?.email}
+                    </CardContent>
               <CardActions>
                 <Button size="small">
                   <FavoriteBorderOutlinedIcon />
@@ -68,14 +82,27 @@ const BlogDetail = () => {
               </CardActions>
             </Card>
           </Grid>
-          <ButtonGroup direction="row" spacing={2}>
-            <Button variant="contained" endIcon={<SendIcon />}>
-              Send
-            </Button>
-            <Button variant="outlined" startIcon={<DeleteIcon />}>
+          <Box sx={{ m: 3 }}>
+            <Link to="/updateBlog">
+              <Button
+                size="large"
+                color="primary"
+                variant="contained"
+                endIcon={<UpdateIcon />}
+              >
+                Update
+              </Button>
+            </Link>
+            <Button
+              size="large"
+              color="secondary"
+              variant="outlined"
+              startIcon={<DeleteIcon />}
+              onClick = {()=>deleteHandler(id)}
+            >
               Delete
             </Button>
-          </ButtonGroup>
+          </Box>
         </Grid>
       </Grid>
     </Grid>

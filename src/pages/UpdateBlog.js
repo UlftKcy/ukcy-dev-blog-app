@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useState , useContext} from "react";
 import { useHistory } from "react-router";
-import { v4 as uuidv4 } from "uuid";
 import {
   Grid,
   TextField,
@@ -11,7 +10,8 @@ import {
   Avatar,
 } from "@material-ui/core";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
-import { addCard } from "../functions/functions";
+import { editHandler } from "../functions/functions";
+import { AuthContext } from "../context/AuthContext";
 
 const useStylesBlog = makeStyles((theme) => ({
   wrapper: {
@@ -29,31 +29,34 @@ const useStylesBlog = makeStyles((theme) => ({
   },
 }));
 
-const NewBlog = () => {
-  const classes = useStylesBlog();
-  const [title, setTitle] = useState("");
-  const [image, setImage] = useState("");
-  const [content, setContent] = useState("");
+const UpdateBlog = () => {
+  const { selectedCard } = useContext(AuthContext)
+  const [title, setTitle] = useState(selectedCard.title);
+  const [image, setImage] = useState(selectedCard.image);
+  const [content, setContent] = useState(selectedCard.content);
+  
   const history = useHistory();
+  const classes = useStylesBlog();
 
-  const handleSubmit = (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
-    const id = uuidv4();
-    const newCard = { id, title, image, content };
-    history.push("/");
-    addCard(newCard);
+    const id = selectedCard.id;
+    const updateCard = {id,title, image, content };
+    history.goBack();
+    // editHandler(updateCard);
+    console.log(updateCard)
   };
-
+  
   return (
     <Container className={classes.wrapper}>
       <Avatar className={classes.avatar}>
         <AddCircleOutlineOutlinedIcon />
       </Avatar>
       <Typography variant="h4" className={classes.newblog}>
-        New Blog
+        Update Blog
       </Typography>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleUpdate}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <TextField
@@ -92,7 +95,7 @@ const NewBlog = () => {
           </Grid>
           <Grid item xs={12}>
             <Button type="submit" variant="contained" color="primary" fullWidth>
-              Submit
+              Update
             </Button>
           </Grid>
         </Grid>
@@ -100,4 +103,4 @@ const NewBlog = () => {
     </Container>
   );
 };
-export default NewBlog;
+export default UpdateBlog;

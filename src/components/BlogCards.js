@@ -8,9 +8,8 @@ import {
   CardMedia,
   CardContent,
   Typography,
-  CardActions,
   Button,
-  Avatar,
+  CardActions,
 } from "@material-ui/core";
 import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
 import ModeCommentOutlinedIcon from "@material-ui/icons/ModeCommentOutlined";
@@ -18,8 +17,8 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { useFetch } from "../functions/functions";
 
 const BlogCards = () => {
-  const {blogCardList} = useFetch();
-  const { setSelectedCard } = useContext(AuthContext);
+  const { blogCardList } = useFetch();
+  const { setSelectedCard, currentUser } = useContext(AuthContext);
 
   const handleClick = (card) => {
     setSelectedCard(card);
@@ -32,13 +31,15 @@ const BlogCards = () => {
             const { id, title, image, content } = card;
             return (
               <Grid key={id} item>
-                <Link to={`/blog/${id}`} onClick={() => handleClick(card)}>
+                <Link
+                  to={currentUser ? `/blog/${id}` : "/login"}
+                  onClick={() => handleClick(card)}
+                >
                   <Card
                     fluid
                     style={{
                       maxWidth: "350px",
                       minHeight: "100%",
-                      margin: "auto",
                       backgroundColor: "#ddd",
                       display: "flex",
                       flexDirection: "column",
@@ -63,21 +64,34 @@ const BlogCards = () => {
                         {title}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        {content}
+                        {content.length < 250
+                          ? content
+                          : content.slice(0, 250) + "..."}
                       </Typography>
                     </CardContent>
-                    <CardContent>
-                      <Avatar>
-                        <AccountCircleIcon />
-                      </Avatar>
+                    <CardContent
+                      style={{
+                        display: "flex",
+                        fontSize: 20,
+                        marginBottom: 10,
+                      }}
+                    >
+                      {currentUser ? <AccountCircleIcon /> : ""}
+                      {currentUser?.email}
                     </CardContent>
-                    <CardActions>
+                    <CardActions
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
                       <Button size="small">
                         <FavoriteBorderOutlinedIcon />
                       </Button>
                       <Button size="small">
                         <ModeCommentOutlinedIcon />
                       </Button>
+                      <Typography>Sep 21, 2021</Typography>
                     </CardActions>
                   </Card>
                 </Link>

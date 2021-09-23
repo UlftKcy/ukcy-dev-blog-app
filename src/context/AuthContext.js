@@ -6,7 +6,6 @@ export const AuthContext = createContext();
 function AuthContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [selectedCard, setSelectedCard] = useState([]);
-
   useEffect(() => {
     userObserver(setCurrentUser);
   }, []);

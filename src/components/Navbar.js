@@ -4,7 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { Container, Link } from "@material-ui/core";
+import { ButtonGroup, Container, Link } from "@material-ui/core";
 import { useHistory } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import { signOut } from "../functions/firebase";
@@ -23,14 +23,15 @@ const useStyles = makeStyles({
     flexGrow: 1,
     cursor: "pointer",
   },
-  loginBtn: {
+  /* loginProfileBtn: {
     marginRight: 6,
+    border: "none",
     "&:hover": {
-      textDecoration: "underline",
+      backgroundColor: "#ffff",
+      color: "#263238",
     },
-  },
-  registerBtn: {
-    backgroundColor: "#f44336",
+  }, */
+  signBtn: {
     color: "#ffff",
     marginRight: 6,
     transition: "all 0.3s",
@@ -66,33 +67,41 @@ export default function Navbar() {
             </Link>
           </Typography>
           {currentUser ? (
-            ""
+            <ButtonGroup>
+              <Button
+                color="primary"
+                className={classes.signBtn}
+                onClick={() => history.push("/profile")}
+              >
+                Profile
+              </Button>
+              <Button
+                color="secondary"
+                variant="contained"
+                className={classes.signBtn}
+                onClick={handleSignOut}
+              >
+                Sign Out
+              </Button>
+            </ButtonGroup>
           ) : (
-            <Button
-              color="inherit"
-              className={classes.loginBtn}
-              onClick={() => history.push("/login")}
-            >
-              Login
-            </Button>
-          )}
-
-          {currentUser ? (
-            <Button
-              variant="contained"
-              className={classes.registerBtn}
-              onClick={handleSignOut}
-            >
-              Sign Out
-            </Button>
-          ) : (
-            <Button
-              variant="contained"
-              className={classes.registerBtn}
-              onClick={() => history.push("/register")}
-            >
-              Register
-            </Button>
+            <ButtonGroup>
+              <Button
+                color="primary"
+                className={classes.signBtn}
+                onClick={() => history.push("/login")}
+              >
+                Login
+              </Button>
+              <Button
+                color="secondary"
+                variant="contained"
+                className={classes.signBtn}
+                onClick={() => history.push("/register")}
+              >
+                Register
+              </Button>
+            </ButtonGroup>
           )}
         </Toolbar>
       </AppBar>
