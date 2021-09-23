@@ -10,25 +10,25 @@ import {
   Typography,
   CardActions,
   Button,
+  Avatar,
 } from "@material-ui/core";
 import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
 import ModeCommentOutlinedIcon from "@material-ui/icons/ModeCommentOutlined";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { useFetch } from "../functions/functions";
 
 const BlogCards = () => {
-  const { blogCardList, isLoading } = useFetch();
-  const { cards } = useContext(AuthContext);
+  const {blogCardList} = useFetch();
   const { setSelectedCard } = useContext(AuthContext);
 
   const handleClick = (card) => {
     setSelectedCard(card);
   };
-
   return (
     <Grid sx={{ flexGrow: 1 }} container spacing={8}>
       <Grid item xs={12}>
         <Grid container justifyContent="space-around" spacing={4}>
-          {cards.map((card) => {
+          {blogCardList.map((card) => {
             const { id, title, image, content } = card;
             return (
               <Grid key={id} item>
@@ -65,6 +65,11 @@ const BlogCards = () => {
                       <Typography variant="body2" color="text.secondary">
                         {content}
                       </Typography>
+                    </CardContent>
+                    <CardContent>
+                      <Avatar>
+                        <AccountCircleIcon />
+                      </Avatar>
                     </CardContent>
                     <CardActions>
                       <Button size="small">

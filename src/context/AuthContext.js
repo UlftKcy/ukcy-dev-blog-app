@@ -5,7 +5,6 @@ export const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
-  const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState([]);
 
   useEffect(() => {
@@ -14,7 +13,7 @@ function AuthContextProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ currentUser, cards, setCards, selectedCard, setSelectedCard }}
+      value={{ currentUser, selectedCard, setSelectedCard }}
     >
       {children}
     </AuthContext.Provider>

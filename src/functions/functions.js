@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react";
 import firebase from "./firebase";
 
-export const addCard = (cards) => {
+export const addCard = (newCard) => {
   const blogCardRef = firebase.database().ref("blogCard");
-  blogCardRef.push(cards);
+  blogCardRef.push(newCard);
 };
 
 export const useFetch = () => {
-  const [blogCardList, setBlogCardList] = useState();
-  const [isLoading, setIsLoading] = useState();
+  const [blogCardList, setBlogCardList] = useState([]);
 
   useEffect(() => {
-    setIsLoading(true);
     const blogCardRef = firebase.database().ref("blogCard");
     blogCardRef.on("value", (snapshot) => {
       const blogCards = snapshot.val();
@@ -21,8 +19,7 @@ export const useFetch = () => {
         blogCardArray.push({ id, ...blogCards[id] });
       }
       setBlogCardList(blogCardArray);
-      setIsLoading(false);
     });
   }, []);
-  return { blogCardList, isLoading };
+  return { blogCardList };
 };

@@ -1,6 +1,5 @@
-import { useState, useContext, useEffect } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router";
-import { AuthContext } from "../context/AuthContext";
 import { v4 as uuidv4 } from "uuid";
 import {
   Grid,
@@ -35,17 +34,14 @@ const NewBlog = () => {
   const [title, setTitle] = useState();
   const [image, setImage] = useState();
   const [content, setContent] = useState();
-  const { cards, setCards } = useContext(AuthContext);
   const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const id = uuidv4();
-    const newBlog = { id, title, image, content };
-    setCards([...cards, newBlog]);
+    const newCard = { id, title, image, content };
     history.push("/");
-    // console.log(newBlog)
-    addCard(cards);
+    addCard(newCard);
   };
 
   return (

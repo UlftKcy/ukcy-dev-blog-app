@@ -7,6 +7,7 @@ import {
   CardActions,
   Button,
   Box,
+  ButtonGroup,
 } from "@material-ui/core";
 import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
 import ModeCommentOutlinedIcon from "@material-ui/icons/ModeCommentOutlined";
@@ -16,7 +17,6 @@ import { AuthContext } from "../context/AuthContext";
 const BlogDetail = () => {
   const { selectedCard } = useContext(AuthContext);
   const { title, image, content } = selectedCard;
-  console.log(selectedCard);
   return (
     <Grid sx={{ flexGrow: 1 }} container spacing={8}>
       <Grid item xs={12}>
@@ -68,6 +68,14 @@ const BlogDetail = () => {
               </CardActions>
             </Card>
           </Grid>
+          <ButtonGroup direction="row" spacing={2}>
+            <Button variant="contained" endIcon={<SendIcon />}>
+              Send
+            </Button>
+            <Button variant="outlined" startIcon={<DeleteIcon />}>
+              Delete
+            </Button>
+          </ButtonGroup>
         </Grid>
       </Grid>
     </Grid>
