@@ -43,7 +43,7 @@ const Profile = () => {
               fullWidth
               required
               value={currentUser?.email}
-              // onChange={formik.handleChange}
+              // onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12}>
@@ -54,7 +54,7 @@ const Profile = () => {
               fullWidth
               required
               value={currentUser?.username}
-              // onChange={formik.handleChange}
+              // onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12}>

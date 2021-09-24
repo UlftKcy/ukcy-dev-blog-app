@@ -7,7 +7,9 @@ import {
   CardContent,
   Typography,
   CardActions,
+  CardHeader,
   Button,
+  IconButton,
   Box,
 } from "@material-ui/core";
 import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
@@ -15,12 +17,12 @@ import ModeCommentOutlinedIcon from "@material-ui/icons/ModeCommentOutlined";
 import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
 import { Link } from "react-router-dom";
-import {deleteHandler} from "../functions/functions";
+import { deleteHandler } from "../functions/functions";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 const BlogDetail = () => {
-  const { selectedCard , currentUser} = useContext(AuthContext);
-  const { id,title, image, content } = selectedCard;
+  const { selectedCard, currentUser } = useContext(AuthContext);
+  const { id, title, image, content } = selectedCard;
   return (
     <Grid sx={{ flexGrow: 1 }} container>
       <Grid item xs={12}>
@@ -31,54 +33,46 @@ const BlogDetail = () => {
 
           <Grid item>
             <Card
-              fluid
               style={{
                 width: "70%",
                 height: "100%",
                 margin: "auto",
-                backgroundColor: "#ddd",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
               }}
             >
-              <CardMedia component="img" alt="image" image={image} />
-              <CardContent
+              <CardHeader
                 style={{
-                  backgroundColor: "#ffff",
+                  backgroundImage:
+                    "linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%)",
                 }}
-              >
-                <Typography
-                  color="primary"
-                  gutterBottom
-                  variant="h4"
-                  component="div"
-                  style={{
-                    textAlign: "center",
-                  }}
-                >
-                  {title}
-                </Typography>
+                title={title}
+                subheader="September 24, 2021"
+              />
+              <CardMedia component="img" image={image} alt="image" />
+              <CardContent>
                 <Typography variant="body2" color="text.secondary">
                   {content}
                 </Typography>
               </CardContent>
               <CardContent
-                      style={{
-                        display: "flex",
-                        fontSize:20,
-                        marginBottom:10
-                      }}
-                    >
-                        <AccountCircleIcon/>{currentUser?.email}
-                    </CardContent>
-              <CardActions>
-                <Button size="small">
+                style={{
+                  display: "flex",
+                  fontSize: 20,
+                  marginBottom: 10,
+                }}
+              >
+                {currentUser ? <AccountCircleIcon /> : ""}
+                {currentUser?.email}
+              </CardContent>
+              <CardActions disableSpacing>
+                <IconButton aria-label="add to favorites">
                   <FavoriteBorderOutlinedIcon />
-                </Button>
-                <Button size="small">
+                </IconButton>
+                <IconButton aria-label="comment">
                   <ModeCommentOutlinedIcon />
-                </Button>
+                </IconButton>
               </CardActions>
             </Card>
           </Grid>
@@ -98,7 +92,7 @@ const BlogDetail = () => {
               color="secondary"
               variant="outlined"
               startIcon={<DeleteIcon />}
-              onClick = {()=>deleteHandler(id)}
+              onClick={() => deleteHandler(id)}
             >
               Delete
             </Button>

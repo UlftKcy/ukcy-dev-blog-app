@@ -8,7 +8,8 @@ import {
   CardMedia,
   CardContent,
   Typography,
-  Button,
+  IconButton,
+  CardHeader,
   CardActions,
 } from "@material-ui/core";
 import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
@@ -24,7 +25,7 @@ const BlogCards = () => {
     setSelectedCard(card);
   };
   return (
-    <Grid sx={{ flexGrow: 1 }} container spacing={8}>
+    <Grid sx={{ flexGrow: 1 }} container>
       <Grid item xs={12}>
         <Grid container justifyContent="space-around" spacing={4}>
           {blogCardList.map((card) => {
@@ -36,62 +37,54 @@ const BlogCards = () => {
                   onClick={() => handleClick(card)}
                 >
                   <Card
-                    fluid
                     style={{
-                      maxWidth: "350px",
+                      maxWidth: 345,
                       minHeight: "100%",
-                      backgroundColor: "#ddd",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
+                      display: "grid",
                     }}
                   >
-                    <CardMedia component="img" alt="image" image={image} />
-                    <CardContent
+                    <CardHeader
                       style={{
-                        backgroundColor: "#ffff",
+                        backgroundImage:
+                          "linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%)",
                       }}
-                    >
-                      <Typography
-                        color="primary"
-                        gutterBottom
-                        variant="h4"
-                        component="div"
-                        style={{
-                          textAlign: "center",
-                        }}
-                      >
-                        {title}
-                      </Typography>
+                      title={title}
+                      subheader="September 24, 2021"
+                    />
+                    <CardMedia
+                      style={{
+                        width: "100%",
+                        height: "200px",
+                        objectFit: "cover",
+                      }}
+                      image={image}
+                      component="img"
+                      alt={title}
+                    />
+                    <CardContent>
                       <Typography variant="body2" color="text.secondary">
-                        {content.length < 250
+                        {content?.length < 250
                           ? content
-                          : content.slice(0, 250) + "..."}
+                          : content?.slice(0, 250) + "..."}
                       </Typography>
                     </CardContent>
                     <CardContent
                       style={{
                         display: "flex",
                         fontSize: 20,
-                        marginBottom: 10,
+                        marginBottom: 5,
                       }}
                     >
                       {currentUser ? <AccountCircleIcon /> : ""}
                       {currentUser?.email}
                     </CardContent>
-                    <CardActions
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <Button size="small">
+                    <CardActions disableSpacing>
+                      <IconButton aria-label="add to favorites">
                         <FavoriteBorderOutlinedIcon />
-                      </Button>
-                      <Button size="small">
+                      </IconButton>
+                      <IconButton aria-label="comment">
                         <ModeCommentOutlinedIcon />
-                      </Button>
-                      <Typography>Sep 21, 2021</Typography>
+                      </IconButton>
                     </CardActions>
                   </Card>
                 </Link>

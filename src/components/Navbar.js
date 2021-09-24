@@ -23,14 +23,6 @@ const useStyles = makeStyles({
     flexGrow: 1,
     cursor: "pointer",
   },
-  /* loginProfileBtn: {
-    marginRight: 6,
-    border: "none",
-    "&:hover": {
-      backgroundColor: "#ffff",
-      color: "#263238",
-    },
-  }, */
   signBtn: {
     color: "#ffff",
     marginRight: 6,
@@ -46,8 +38,6 @@ export default function Navbar() {
   const history = useHistory();
   const classes = useStyles();
   const { currentUser } = useContext(AuthContext);
-  // console.log(currentUser);
-
   const handleSignOut = () => {
     signOut();
     history.push("/");

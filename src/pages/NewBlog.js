@@ -70,7 +70,7 @@ const NewBlog = () => {
             <TextField
               name="image"
               id="outlined-basic"
-              label="Image"
+              label="Image URL"
               variant="outlined"
               fullWidth
               value={image}

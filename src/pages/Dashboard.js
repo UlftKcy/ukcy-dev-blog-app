@@ -4,7 +4,7 @@ import { Container } from "@material-ui/core";
 
 const Dashboard = () => {
   return (
-    <Container>
+    <Container maxWidth="lg">
       <Header />
       <BlogCards />
     </Container>

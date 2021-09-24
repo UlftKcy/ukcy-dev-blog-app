@@ -3,7 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link, Typography } from "@material-ui/core";
+import { Container, Link, Typography } from "@material-ui/core";
 import { Paper } from "@material-ui/core";
 import { useHistory } from "react-router";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
@@ -55,7 +55,7 @@ const Header = () => {
   const history = useHistory();
   const classes = useStylesHeader();
   return (
-    <Box className={classes.root}>
+    <Container className={classes.root}>
       <Box className={classes.container}>
         <Paper className={classes.paperContainer}></Paper>
         <Typography variant="h2">
@@ -102,7 +102,7 @@ const Header = () => {
           </Link>
         </Box>
       </Box>
-    </Box>
+    </Container>
   );
 };
 export default Header;
