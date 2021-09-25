@@ -39,7 +39,7 @@ const Login = () => {
     signIn(values.email, values.password);
     history.push("/");
   };
-  const handleGoogleButtonClick = async () => {
+  const handleGoogleButtonClick = () => {
     signUpProvider();
     history.push("/");
   };
