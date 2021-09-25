@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import { ErrorMessage, Form, Formik } from "formik";
@@ -14,6 +14,7 @@ import {
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { createUser } from "../functions/firebase";
+import { AuthContext } from "../context/AuthContext";
 
 const stylesFunc = makeStyles({
   wrapper: {
@@ -51,10 +52,12 @@ const validationSchema = yup.object({
 });
 
 const Register = () => {
+  const { userValues, setUserValues } = useContext(AuthContext);
   const history = useHistory();
 
   const onSubmit = (values) => {
-    console.log("values:", values);
+    // console.log("values:", values);
+    setUserValues(values);
     createUser(values.email, values.password, values.username);
     history.push("/");
   };

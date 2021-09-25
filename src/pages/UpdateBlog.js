@@ -41,12 +41,11 @@ const UpdateBlog = () => {
   const handleUpdate = (e) => {
     e.preventDefault();
     const id = selectedCard.id;
-    const updateCard = {id,title, image, content };
+    const newCard = {id,title, image, content };
     history.goBack();
-    // editHandler(updateCard);
-    console.log(updateCard)
+    editHandler(newCard);
+    console.log(newCard)
   };
-  
   return (
     <Container className={classes.wrapper}>
       <Avatar className={classes.avatar}>

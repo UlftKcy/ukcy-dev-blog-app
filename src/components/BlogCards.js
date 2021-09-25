@@ -11,6 +11,8 @@ import {
   IconButton,
   CardHeader,
   CardActions,
+  Box,
+  CircularProgress,
 } from "@material-ui/core";
 import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
 import ModeCommentOutlinedIcon from "@material-ui/icons/ModeCommentOutlined";
@@ -18,22 +20,33 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { useFetch } from "../functions/functions";
 
 const BlogCards = () => {
-  const { blogCardList } = useFetch();
+  const { blogCardList, isLoading } = useFetch();
   const { setSelectedCard, currentUser } = useContext(AuthContext);
 
   const handleClick = (card) => {
     setSelectedCard(card);
   };
   return (
-    <Grid sx={{ flexGrow: 1 }} container>
+    <Grid container sx={{ flexGrow: 1 }}>
       <Grid item xs={12}>
         <Grid container justifyContent="space-around" spacing={4}>
-          {blogCardList.map((card) => {
-            const { id, title, image, content } = card;
-            return (
-              <Grid key={id} item>
+          {isLoading ? (
+            <Grid item>
+              <Typography>
+                <Box sx={{ display: "flex" }}>
+                  <CircularProgress />
+                </Box>
+              </Typography>
+            </Grid>
+          ) : blogCardList.length === 0 ? (
+            <Grid item>
+              <Typography>Nothing Found!</Typography>
+            </Grid>
+          ) : (
+            blogCardList.map((card) => (
+              <Grid key={card.id} item>
                 <Link
-                  to={currentUser ? `/blog/${id}` : "/login"}
+                  to={currentUser ? `/blog/${card.id}` : "/login"}
                   onClick={() => handleClick(card)}
                 >
                   <Card
@@ -48,7 +61,7 @@ const BlogCards = () => {
                         backgroundImage:
                           "linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%)",
                       }}
-                      title={title}
+                      title={card.title}
                       subheader="September 24, 2021"
                     />
                     <CardMedia
@@ -57,15 +70,15 @@ const BlogCards = () => {
                         height: "200px",
                         objectFit: "cover",
                       }}
-                      image={image}
+                      image={card.image}
                       component="img"
-                      alt={title}
+                      alt={card.title}
                     />
                     <CardContent>
                       <Typography variant="body2" color="text.secondary">
-                        {content?.length < 250
-                          ? content
-                          : content?.slice(0, 250) + "..."}
+                        {card.content?.length < 250
+                          ? card.content
+                          : card.content?.slice(0, 250) + "..."}
                       </Typography>
                     </CardContent>
                     <CardContent
@@ -89,8 +102,8 @@ const BlogCards = () => {
                   </Card>
                 </Link>
               </Grid>
-            );
-          })}
+            ))
+          )}
         </Grid>
       </Grid>
     </Grid>

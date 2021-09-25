@@ -4,9 +4,7 @@ import { useHistory } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Form, Formik, useFormik, ErrorMessage } from "formik";
 import * as yup from "yup";
-import {
-  signIn /* , signUpProvider, forgotPassword */,
-} from "../functions/firebase";
+import { signIn, signUpProvider, forgotPassword } from "../functions/firebase";
 
 const useStylesLogin = makeStyles({
   wrapper: {
@@ -39,6 +37,10 @@ const Login = () => {
   const onSubmit = (values) => {
     console.log("values:", values);
     signIn(values.email, values.password);
+    history.push("/");
+  };
+  const handleGoogleButtonClick = async () => {
+    signUpProvider();
     history.push("/");
   };
 
@@ -113,16 +115,7 @@ const Login = () => {
                 variant="contained"
                 color="primary"
                 fullWidth
-              >
-                Forgot Password
-              </Button>
-            </Grid>
-            <Grid item xs={12}>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                fullWidth
+                onClick={handleGoogleButtonClick}
               >
                 Login With Google
               </Button>

@@ -16,18 +16,16 @@ export const createUser = async (email, password, username) => {
     await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        // Signed in
-        // const user = userCredential.user;
-        // ...
+      .then((user) => {
+        // const displayName = username;
+        // console.log(displayName)
       })
       .catch((error) => {
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
+        const errorCode = error.code;
+        const errorMessage = error.message;
       });
 
     const currentUser = firebase.auth().currentUser;
-    console.log(currentUser);
     await currentUser.updateProfile({ username });
   } catch (error) {
     alert(
@@ -41,12 +39,12 @@ export const signIn = (email, password) => {
     .signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
       // Signed in
-      // var user = userCredential.user;
+      var user = userCredential.user;
       // ...
     })
     .catch((error) => {
-      // var errorCode = error.code;
-      // var errorMessage = error.message;
+      var errorCode = error.code;
+      var errorMessage = error.message;
       alert("The password is invalid or the user does not have a password!");
     });
 };
@@ -66,15 +64,15 @@ export const userObserver = async (setCurrentUser) => {
   });
 };
 
-/* export const signUpProvider = () => {
+export const signUpProvider = () => {
   var provider = new firebase.auth.GoogleAuthProvider();
   provider.setCustomParameters({ prompt: "select_account" });
   firebase.auth().signInWithPopup(provider);
 };
 
 export const forgotPassword = (email) => {
-    firebase.auth().sendPasswordResetEmail(email);
-    alert("Please check your mail box!");
-  }; */
+  firebase.auth().sendPasswordResetEmail(email);
+  alert("Please check your mail box!");
+};
 
 export default firebaseApp;

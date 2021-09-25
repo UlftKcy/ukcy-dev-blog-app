@@ -23,7 +23,6 @@ const useStylesProfile = makeStyles({
 const Profile = () => {
   const classes = useStylesProfile();
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser);
   return (
     <Container maxWidth="md" className={classes.wrapper}>
       <Avatar className={classes.avatar}>
@@ -34,7 +33,7 @@ const Profile = () => {
       </Typography>
 
       <form>
-        <Grid container spacing={3}>
+        <Grid container spacing={4}>
           <Grid item xs={12}>
             <TextField
               name="email"
@@ -53,7 +52,7 @@ const Profile = () => {
               type="text"
               fullWidth
               required
-              value={currentUser?.username}
+              value={currentUser?.displayName}
               // onChange={handleChange}
             />
           </Grid>

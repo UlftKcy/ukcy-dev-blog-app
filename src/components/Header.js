@@ -58,10 +58,8 @@ const Header = () => {
     <Container className={classes.root}>
       <Box className={classes.container}>
         <Paper className={classes.paperContainer}></Paper>
-        <Typography variant="h2">
-          <Box sx={{ fontFamily: "Monospace", color: "#f44336" }} mb={5}>
-            Create Your Blog Page
-          </Box>
+        <Typography variant="h2" color="secondary">
+          Create Your Blog Page
         </Typography>
         <Typography variant="h6">
           <Box mb={5} sx={{ color: "#263238" }}>

@@ -8,8 +8,10 @@ export const addCard = (newCard) => {
 
 export const useFetch = () => {
   const [blogCardList, setBlogCardList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const blogCardRef = firebase.database().ref("blogCard");
     blogCardRef.on("value", (snapshot) => {
       const blogCards = snapshot.val();
@@ -19,19 +21,16 @@ export const useFetch = () => {
         blogCardArray.push({ id, ...blogCards[id] });
       }
       setBlogCardList(blogCardArray);
-      // console.log(blogCardArray)
+      setIsLoading(false);
+      console.log(blogCardArray);
     });
   }, []);
-  return { blogCardList };
+  return { blogCardList, isLoading };
 };
 
-export const editHandler = (updateCard) => {
-  const blogCardRef = firebase.database().ref("blogCard").child(updateCard.id);
-  blogCardRef.update({
-    title: updateCard.title,
-    image: updateCard.image,
-    content: updateCard.content,
-  });
+export const editHandler = (newCard) => {
+  const blogCardRef = firebase.database().ref("blogCard").child(newCard.id);
+  blogCardRef.update(newCard);
 };
 
 export const deleteHandler = (id) => {

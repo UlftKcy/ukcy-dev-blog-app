@@ -5,14 +5,22 @@ export const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
+  const [userValues, setUserValues] = useState(null);
   const [selectedCard, setSelectedCard] = useState([]);
+
   useEffect(() => {
     userObserver(setCurrentUser);
   }, []);
 
   return (
     <AuthContext.Provider
-      value={{ currentUser, selectedCard, setSelectedCard }}
+      value={{
+        currentUser,
+        userValues,
+        setUserValues,
+        selectedCard,
+        setSelectedCard,
+      }}
     >
       {children}
     </AuthContext.Provider>
