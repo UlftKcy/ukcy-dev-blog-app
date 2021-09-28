@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useFormik } from "formik";
-import { ErrorMessage, Form, Formik } from "formik";
+import { useFormik, ErrorMessage, Form, Formik } from "formik";
 import * as yup from "yup";
+import { createUser } from "../utils/firebase";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
@@ -11,32 +11,31 @@ import {
   Container,
   Avatar,
   Typography,
+  /* InputAdornment,
+  IconButton, */
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { createUser } from "../functions/firebase";
-import { AuthContext } from "../context/AuthContext";
+/* import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import VisibilityIcon from "@material-ui/icons/Visibility"; */
 
 const stylesFunc = makeStyles({
   wrapper: {
-    margin: "auto",
-    height: "calc(100vh - 19.0625rem)",
-    textAlign: "center",
     maxWidth: "30rem",
+    height: "30rem",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
   avatar: {
-    margin: "1rem auto",
+    marginTop: 165,
+    marginBottom: 20,
     backgroundColor: "#f44336",
   },
   signUp: {
-    margin: "1rem",
+    marginBottom: 20,
   },
 });
-const initialValues = {
-  username: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-};
 
 const validationSchema = yup.object({
   username: yup.string().required("Please Enter a username"),
@@ -50,9 +49,16 @@ const validationSchema = yup.object({
     .required("Confirm your password")
     .oneOf([yup.ref("password")], "Password does not match"),
 });
+const initialValues = {
+  username: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+  showPassword: "false",
+};
 
 const Register = () => {
-  const { userValues, setUserValues } = useContext(AuthContext);
+  const [setUserValues] = useState(initialValues);
   const history = useHistory();
 
   const onSubmit = (values) => {
@@ -133,6 +139,7 @@ const Register = () => {
                 }
                 helperText={formik.touched.password && formik.errors.password}
               />
+
               <ErrorMessage name="password" />
             </Grid>
             <Grid item xs={12}>

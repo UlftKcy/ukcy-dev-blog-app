@@ -17,17 +17,14 @@ import {
 import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
 import ModeCommentOutlinedIcon from "@material-ui/icons/ModeCommentOutlined";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import { useFetch } from "../functions/functions";
+import { useFetch } from "../utils/functions";
 
 const BlogCards = () => {
   const { blogCardList, isLoading } = useFetch();
   const { setSelectedCard, currentUser } = useContext(AuthContext);
-
-  const handleClick = (card) => {
-    setSelectedCard(card);
-  };
+  
   return (
-    <Grid container sx={{ flexGrow: 1 }}>
+    <Grid container sx={{ flexGrow: 1}}>
       <Grid item xs={12}>
         <Grid container justifyContent="space-around" spacing={4}>
           {isLoading ? (
@@ -47,13 +44,14 @@ const BlogCards = () => {
               <Grid key={card.id} item>
                 <Link
                   to={currentUser ? `/blog/${card.id}` : "/login"}
-                  onClick={() => handleClick(card)}
+                  onClick={()=>setSelectedCard(card)}
                 >
                   <Card
                     style={{
                       maxWidth: 345,
                       minHeight: "100%",
                       display: "grid",
+                      marginTop:20
                     }}
                   >
                     <CardHeader
@@ -89,7 +87,7 @@ const BlogCards = () => {
                       }}
                     >
                       {currentUser ? <AccountCircleIcon /> : ""}
-                      {currentUser?.email}
+                      {card.author}
                     </CardContent>
                     <CardActions disableSpacing>
                       <IconButton aria-label="add to favorites">

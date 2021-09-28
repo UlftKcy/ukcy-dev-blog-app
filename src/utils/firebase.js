@@ -18,15 +18,14 @@ export const createUser = async (email, password, username) => {
       .createUserWithEmailAndPassword(email, password)
       .then((user) => {
         // const displayName = username;
-        // console.log(displayName)
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
       });
 
     const currentUser = firebase.auth().currentUser;
-    await currentUser.updateProfile({ username });
+    await currentUser.updateProfile({ displayName:username });
   } catch (error) {
     alert(
       "There exists an account with this email. Please login with your password or continue with Google!"
@@ -40,11 +39,10 @@ export const signIn = (email, password) => {
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
-      // ...
     })
     .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      // var errorCode = error.code;
+      // var errorMessage = error.message;
       alert("The password is invalid or the user does not have a password!");
     });
 };
@@ -62,6 +60,7 @@ export const userObserver = async (setCurrentUser) => {
       setCurrentUser(null);
     }
   });
+  
 };
 
 export const signUpProvider = () => {

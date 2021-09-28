@@ -10,7 +10,7 @@ import {
   Avatar,
 } from "@material-ui/core";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
-import { editHandler } from "../functions/functions";
+import { editHandler } from "../utils/functions";
 import { AuthContext } from "../context/AuthContext";
 
 const useStylesBlog = makeStyles((theme) => ({

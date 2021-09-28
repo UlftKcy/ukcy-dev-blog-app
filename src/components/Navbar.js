@@ -7,12 +7,12 @@ import Button from "@material-ui/core/Button";
 import { ButtonGroup, Container, Link } from "@material-ui/core";
 import { useHistory } from "react-router";
 import { AuthContext } from "../context/AuthContext";
-import { signOut } from "../functions/firebase";
+import { signOut } from "../utils/firebase";
+import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginBottom: 100,
   },
   bar: {
     backgroundColor: "#263238",
@@ -22,17 +22,23 @@ const useStyles = makeStyles({
   title: {
     flexGrow: 1,
     cursor: "pointer",
+    marginRight: 5,
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "12px",
+    },
   },
   signBtn: {
     color: "#ffff",
-    marginRight: 6,
     transition: "all 0.3s",
     "&:hover": {
       backgroundColor: "#ffff",
       color: "#f44336",
     },
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "10px",
+    },
   },
-});
+}));
 
 export default function Navbar() {
   const history = useHistory();
@@ -44,7 +50,7 @@ export default function Navbar() {
   };
 
   return (
-    <Container className={classes.root}>
+    <Container maxWidth="lg" className={classes.root}>
       <AppBar position="fixed" className={classes.bar}>
         <Toolbar>
           <Typography variant="h5" className={classes.title}>
@@ -53,7 +59,7 @@ export default function Navbar() {
               underline="none"
               onClick={() => history.push("/")}
             >
-              Blog
+              <code>{"<UlfetKacay/>"}</code>
             </Link>
           </Typography>
           {currentUser ? (
@@ -63,7 +69,7 @@ export default function Navbar() {
                 className={classes.signBtn}
                 onClick={() => history.push("/profile")}
               >
-                Profile
+                Profile <PersonOutlineIcon />
               </Button>
               <Button
                 color="secondary"
@@ -81,7 +87,7 @@ export default function Navbar() {
                 className={classes.signBtn}
                 onClick={() => history.push("/login")}
               >
-                Login
+                Login <PersonOutlineIcon />
               </Button>
               <Button
                 color="secondary"

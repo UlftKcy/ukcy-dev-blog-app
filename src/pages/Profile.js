@@ -6,23 +6,27 @@ import { AuthContext } from "../context/AuthContext";
 
 const useStylesProfile = makeStyles({
   wrapper: {
-    margin: "auto",
-    height: "calc(100vh - 19.0625rem)",
-    textAlign: "center",
     maxWidth: "30rem",
+    minHeight: "30rem",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
   avatar: {
-    margin: "1rem auto",
+    marginTop: 65,
+    marginBottom: 20,
     backgroundColor: "#263238",
   },
   login: {
-    margin: 15,
+    marginBottom: 20,
   },
 });
 
 const Profile = () => {
   const classes = useStylesProfile();
   const { currentUser } = useContext(AuthContext);
+
   return (
     <Container maxWidth="md" className={classes.wrapper}>
       <Avatar className={classes.avatar}>
@@ -41,8 +45,9 @@ const Profile = () => {
               type="text"
               fullWidth
               required
+              placeholder="Email"
               value={currentUser?.email}
-              // onChange={handleChange}
+              // onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={12}>
@@ -52,8 +57,9 @@ const Profile = () => {
               type="text"
               fullWidth
               required
+              placeholder="userName(optional)"
               value={currentUser?.displayName}
-              // onChange={handleChange}
+              // onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={12}>

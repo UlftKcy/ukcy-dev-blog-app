@@ -1,12 +1,13 @@
 import { createContext, useState, useEffect } from "react";
-import { userObserver } from "../functions/firebase";
+import { userObserver } from "../utils/firebase";
+import { v4 as uuidv4 } from "uuid";
 
 export const AuthContext = createContext();
 
-function AuthContextProvider({ children }) {
+function AuthContextProvider(props) {
   const [currentUser, setCurrentUser] = useState();
-  const [userValues, setUserValues] = useState(null);
-  const [selectedCard, setSelectedCard] = useState([]);
+  const [selectedCard, setSelectedCard] = useState();
+ 
 
   useEffect(() => {
     userObserver(setCurrentUser);
@@ -16,13 +17,11 @@ function AuthContextProvider({ children }) {
     <AuthContext.Provider
       value={{
         currentUser,
-        userValues,
-        setUserValues,
         selectedCard,
-        setSelectedCard,
+        setSelectedCard
       }}
     >
-      {children}
+      {props.children}
     </AuthContext.Provider>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import { v4 as uuidv4 } from "uuid";
 import {
@@ -11,37 +11,56 @@ import {
   Avatar,
 } from "@material-ui/core";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
-import { addCard } from "../functions/functions";
+import { addCard } from "../utils/functions";
+import { AuthContext } from "../context/AuthContext";
 
 const useStylesBlog = makeStyles((theme) => ({
   wrapper: {
-    margin: "auto",
-    height: "calc(100vh - 19.0625rem)",
-    textAlign: "center",
     maxWidth: "30rem",
+    minHeight: "30rem",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
   avatar: {
-    margin: "1rem auto",
+    marginTop: 90,
+    marginBottom: 20,
     backgroundColor: theme.palette.primary.main,
   },
   newblog: {
-    margin: "1rem",
+    marginBottom: 20,
   },
 }));
 
 const NewBlog = () => {
   const classes = useStylesBlog();
-  const [title, setTitle] = useState("");
-  const [image, setImage] = useState("");
-  const [content, setContent] = useState("");
+  const { currentUser } = useContext(AuthContext);
   const history = useHistory();
+  const [newBlog, setNewBlog] = useState({
+    author: currentUser?.email,
+    id: uuidv4(),
+    title: "",
+    image: "",
+    content: "",
+    favorite_count: "",
+    comment_count: "",
+  });
+  const handleNewBlog = (e) => {
+    // const name = e.target.name;
+    // const value = e.target.value;
+    const { name, value } = e.target;
+    /* const favorite_count = e.target.value;
+    const comment_count = e.target.value; */
+    setNewBlog({ ...newBlog, [name]: value });
+    // console.log(newBlog)
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const id = uuidv4();
-    const newCard = { id, title, image, content };
+    addCard(newBlog);
     history.push("/");
-    addCard(newCard);
+    console.log(newBlog);
   };
 
   return (
@@ -62,8 +81,8 @@ const NewBlog = () => {
               label="Title"
               variant="outlined"
               fullWidth
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={newBlog.title}
+              onChange={handleNewBlog}
             />
           </Grid>
           <Grid item xs={12}>
@@ -73,8 +92,8 @@ const NewBlog = () => {
               label="Image URL"
               variant="outlined"
               fullWidth
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
+              value={newBlog.image}
+              onChange={handleNewBlog}
             />
           </Grid>
           <Grid item xs={12}>
@@ -86,8 +105,8 @@ const NewBlog = () => {
               rows={4}
               variant="outlined"
               fullWidth
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
+              value={newBlog.content}
+              onChange={handleNewBlog}
             />
           </Grid>
           <Grid item xs={12}>

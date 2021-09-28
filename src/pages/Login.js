@@ -4,21 +4,24 @@ import { useHistory } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Form, Formik, useFormik, ErrorMessage } from "formik";
 import * as yup from "yup";
-import { signIn, signUpProvider, forgotPassword } from "../functions/firebase";
+import { signIn, signUpProvider, forgotPassword } from "../utils/firebase";
 
 const useStylesLogin = makeStyles({
   wrapper: {
-    margin: "auto",
-    height: "calc(100vh - 19.0625rem)",
-    textAlign: "center",
     maxWidth: "30rem",
+    minHeight: "30rem",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
   avatar: {
-    margin: "1rem auto",
+    marginTop: 65,
+    marginBottom: 20,
     backgroundColor: "#f44336",
   },
   login: {
-    margin: 15,
+    marginBottom: 20,
   },
 });
 const initialValues = {
@@ -52,7 +55,7 @@ const Login = () => {
   });
 
   return (
-    <Container maxWidth="md" className={classes.wrapper}>
+    <Container className={classes.wrapper}>
       <Avatar className={classes.avatar}>
         <LockOutlinedIcon />
       </Avatar>

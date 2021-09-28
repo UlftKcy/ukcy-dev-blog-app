@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import {
@@ -18,14 +18,14 @@ import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutline
 import ModeCommentOutlinedIcon from "@material-ui/icons/ModeCommentOutlined";
 import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
-import { deleteHandler, useFetch } from "../functions/functions";
+import { deleteHandler, useFetch } from "../utils/functions";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 const BlogDetail = () => {
   const history = useHistory();
   const { isLoading } = useFetch();
   const { selectedCard, currentUser } = useContext(AuthContext);
-  const { id, title, image, content } = selectedCard;
+  
   return (
     <Grid sx={{ flexGrow: 1 }} container>
       {isLoading ? (
@@ -43,7 +43,7 @@ const BlogDetail = () => {
               <Box sx={{ fontFamily: "Monospace", m: 3 }}>DETAILS</Box>
             </Typography>
             <Grid item>
-              <Card
+              <Card 
                 style={{
                   width: "70%",
                   height: "100%",
@@ -58,13 +58,13 @@ const BlogDetail = () => {
                     backgroundImage:
                       "linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%)",
                   }}
-                  title={title}
+                  title={selectedCard?.title}
                   subheader="September 24, 2021"
                 />
-                <CardMedia component="img" image={image} alt="image" />
+                <CardMedia component="img" image={selectedCard?.image} alt={selectedCard?.title} />
                 <CardContent>
                   <Typography variant="body2" color="text.secondary">
-                    {content}
+                    {selectedCard?.content}
                   </Typography>
                 </CardContent>
                 <CardContent
@@ -75,7 +75,7 @@ const BlogDetail = () => {
                   }}
                 >
                   {currentUser ? <AccountCircleIcon /> : ""}
-                  {currentUser?.email}
+                  {selectedCard?.author}
                 </CardContent>
                 <CardActions disableSpacing>
                   <IconButton aria-label="add to favorites">
@@ -103,7 +103,7 @@ const BlogDetail = () => {
                 color="secondary"
                 variant="outlined"
                 startIcon={<DeleteIcon />}
-                onClick={() => deleteHandler(id)}
+                onClick={() => deleteHandler(selectedCard?.id)}
               >
                 Delete
               </Button>

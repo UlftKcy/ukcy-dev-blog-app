@@ -9,24 +9,24 @@ import { useHistory } from "react-router";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import GitHubIcon from "@material-ui/icons/GitHub";
 
-const useStylesHeader = makeStyles({
+const useStylesHeader = makeStyles((theme) => ({
   root: {
     height: "100vh",
     width: "100%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "flex-start",
+    alignItems: "center",
   },
   container: {
-    maxWidth: "30rem",
+    maxWidth: "40rem",
     height: "20rem",
     color: "#ffff",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "flex-start",
-    marginBottom: "8rem",
+    justifyContent: "space-around",
+    alignItems: "center",
+    margin: "auto",
   },
   paperContainer: {
     backgroundImage: `url(${"images/header-bgImg.jpg"})`,
@@ -40,6 +40,16 @@ const useStylesHeader = makeStyles({
     left: "0",
     zIndex: "-1",
   },
+  heading: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "25px",
+    },
+  },
+  subcontent: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "15px",
+    },
+  },
   link: {
     cursor: "pointer",
   },
@@ -48,7 +58,7 @@ const useStylesHeader = makeStyles({
     color: "black",
     marginRight: 5,
   },
-});
+}));
 const Header = () => {
   const { currentUser } = useContext(AuthContext);
 
@@ -56,18 +66,21 @@ const Header = () => {
   const classes = useStylesHeader();
   return (
     <Container className={classes.root}>
+      <Paper className={classes.paperContainer}></Paper>
       <Box className={classes.container}>
-        <Paper className={classes.paperContainer}></Paper>
-        <Typography variant="h2" color="secondary">
+        <Typography className={classes.heading} variant="h2" color="secondary">
           Create Your Blog Page
         </Typography>
-        <Typography variant="h6">
+        <Typography className={classes.subcontent} variant="h6">
           <Box mb={5} sx={{ color: "#263238" }}>
             Create | Read | Update | Delete
           </Box>
         </Typography>
 
         <Button
+          style={{
+            width: "50%",
+          }}
           onClick={() =>
             currentUser ? history.push("/newblog") : history.push("/login")
           }
