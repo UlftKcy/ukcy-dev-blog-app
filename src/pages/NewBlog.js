@@ -17,14 +17,13 @@ import { AuthContext } from "../context/AuthContext";
 const useStylesBlog = makeStyles((theme) => ({
   wrapper: {
     maxWidth: "30rem",
-    minHeight: "30rem",
+    minHeight: "100vh",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
   },
   avatar: {
-    marginTop: 90,
     marginBottom: 20,
     backgroundColor: theme.palette.primary.main,
   },
@@ -60,7 +59,6 @@ const NewBlog = () => {
     e.preventDefault();
     addCard(newBlog);
     history.push("/");
-    console.log(newBlog);
   };
 
   return (

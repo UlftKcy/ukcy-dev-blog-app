@@ -22,9 +22,9 @@ import { useFetch } from "../utils/functions";
 const BlogCards = () => {
   const { blogCardList, isLoading } = useFetch();
   const { setSelectedCard, currentUser } = useContext(AuthContext);
-  
+
   return (
-    <Grid container sx={{ flexGrow: 1}}>
+    <Grid container sx={{ flexGrow: 1 }}>
       <Grid item xs={12}>
         <Grid container justifyContent="space-around" spacing={4}>
           {isLoading ? (
@@ -44,14 +44,14 @@ const BlogCards = () => {
               <Grid key={card.id} item>
                 <Link
                   to={currentUser ? `/blog/${card.id}` : "/login"}
-                  onClick={()=>setSelectedCard(card)}
+                  onClick={() => setSelectedCard(card)}
                 >
                   <Card
                     style={{
                       maxWidth: 345,
                       minHeight: "100%",
                       display: "grid",
-                      marginTop:20
+                      marginTop: 20,
                     }}
                   >
                     <CardHeader

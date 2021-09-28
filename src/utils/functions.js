@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { successToastify } from "./customToastify";
 import firebase from "./firebase";
 
 export const addCard = (newBlog) => {
   const blogCardRef = firebase.database().ref("blogCard");
   blogCardRef.push(newBlog);
+  successToastify("Added successfully")
 };
 
 export const useFetch = () => {
@@ -12,7 +14,7 @@ export const useFetch = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    const blogCardRef = firebase.database().ref("blogCard");
+    const blogCardRef = firebase.database()?.ref("blogCard");
     blogCardRef.on("value", (snapshot) => {
       const blogCards = snapshot.val();
 
@@ -31,9 +33,11 @@ export const useFetch = () => {
 export const editHandler = (newBlog) => {
   const blogCardRef = firebase.database().ref("blogCard").child(newBlog.id);
   blogCardRef.update(newBlog);
+  successToastify("Updated Successfully")
 };
 
 export const deleteHandler = (id) => {
   const blogCardRef = firebase.database().ref("blogCard").child(id);
   blogCardRef.remove();
+  successToastify("Deleted successfully");
 };

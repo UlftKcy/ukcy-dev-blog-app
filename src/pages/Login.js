@@ -9,14 +9,13 @@ import { signIn, signUpProvider, forgotPassword } from "../utils/firebase";
 const useStylesLogin = makeStyles({
   wrapper: {
     maxWidth: "30rem",
-    minHeight: "30rem",
+    minHeight: "100vh",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
   },
   avatar: {
-    marginTop: 65,
     marginBottom: 20,
     backgroundColor: "#f44336",
   },

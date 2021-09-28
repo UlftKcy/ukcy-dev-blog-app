@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect } from "react";
 import { userObserver } from "../utils/firebase";
-import { v4 as uuidv4 } from "uuid";
 
 export const AuthContext = createContext();
 
@@ -17,6 +16,7 @@ function AuthContextProvider(props) {
     <AuthContext.Provider
       value={{
         currentUser,
+        setCurrentUser,
         selectedCard,
         setSelectedCard
       }}

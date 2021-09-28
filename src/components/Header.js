@@ -41,11 +41,14 @@ const useStylesHeader = makeStyles((theme) => ({
     zIndex: "-1",
   },
   heading: {
+    color: "#fff9c4",
+    fontWeight: "700",
     [theme.breakpoints.down("xs")]: {
       fontSize: "25px",
     },
   },
   subcontent: {
+    color: "#fffde7",
     [theme.breakpoints.down("xs")]: {
       fontSize: "15px",
     },
@@ -54,8 +57,8 @@ const useStylesHeader = makeStyles((theme) => ({
     cursor: "pointer",
   },
   icon: {
-    fontSize: "2rem",
-    color: "black",
+    fontSize: "2.5rem",
+    color: "#000",
     marginRight: 5,
   },
 }));
@@ -68,13 +71,11 @@ const Header = () => {
     <Container className={classes.root}>
       <Paper className={classes.paperContainer}></Paper>
       <Box className={classes.container}>
-        <Typography className={classes.heading} variant="h2" color="secondary">
+        <Typography className={classes.heading} variant="h2">
           Create Your Blog Page
         </Typography>
         <Typography className={classes.subcontent} variant="h6">
-          <Box mb={5} sx={{ color: "#263238" }}>
-            Create | Read | Update | Delete
-          </Box>
+          <Box>Create | Read | Update | Delete</Box>
         </Typography>
 
         <Button

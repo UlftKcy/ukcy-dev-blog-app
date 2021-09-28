@@ -4,17 +4,17 @@ import PersonIcon from "@material-ui/icons/Person";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
+
 const useStylesProfile = makeStyles({
   wrapper: {
     maxWidth: "30rem",
-    minHeight: "30rem",
+    minHeight: "100vh",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
   },
   avatar: {
-    marginTop: 65,
     marginBottom: 20,
     backgroundColor: "#263238",
   },
@@ -25,7 +25,15 @@ const useStylesProfile = makeStyles({
 
 const Profile = () => {
   const classes = useStylesProfile();
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setCurrentUser({ ...currentUser, [name]: value });
+  };
+  const handleProfileSubmit = (e) => {
+    e.preventDefault();
+    // updateProfile(currentUser.email,currentUser.displayName)
+  };
 
   return (
     <Container maxWidth="md" className={classes.wrapper}>
@@ -47,7 +55,7 @@ const Profile = () => {
               required
               placeholder="Email"
               value={currentUser?.email}
-              // onChange={handleInputChange}
+              onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={12}>
@@ -59,11 +67,17 @@ const Profile = () => {
               required
               placeholder="userName(optional)"
               value={currentUser?.displayName}
-              // onChange={handleInputChange}
+              onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={12}>
-            <Button type="submit" variant="contained" color="primary" fullWidth>
+            <Button
+              onClick={handleProfileSubmit}
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+            >
               Save
             </Button>
           </Grid>

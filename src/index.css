@@ -9,6 +9,12 @@ html {
 body {
   margin: 0;
   padding: 0;
+  background-image: linear-gradient(
+    to top,
+    #d5dee7 0%,
+    #ffafbd 0%,
+    #c9ffbf 100%
+  );
 }
 
 a {

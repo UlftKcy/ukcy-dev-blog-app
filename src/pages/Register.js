@@ -21,14 +21,13 @@ import VisibilityIcon from "@material-ui/icons/Visibility"; */
 const stylesFunc = makeStyles({
   wrapper: {
     maxWidth: "30rem",
-    height: "30rem",
+    minHeight: "100vh",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
   },
   avatar: {
-    marginTop: 165,
     marginBottom: 20,
     backgroundColor: "#f44336",
   },
@@ -58,12 +57,9 @@ const initialValues = {
 };
 
 const Register = () => {
-  const [setUserValues] = useState(initialValues);
   const history = useHistory();
 
   const onSubmit = (values) => {
-    // console.log("values:", values);
-    setUserValues(values);
     createUser(values.email, values.password, values.username);
     history.push("/");
   };

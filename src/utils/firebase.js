@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
+import { successToastify } from "./customToastify";
 
 const firebaseApp = firebase.initializeApp({
   apiKey: "AIzaSyAzirc8iKJ0u6V7p5k7RTBH1srpgjPecgo",
@@ -25,7 +26,8 @@ export const createUser = async (email, password, username) => {
       });
 
     const currentUser = firebase.auth().currentUser;
-    await currentUser.updateProfile({ displayName:username });
+    await currentUser.updateProfile({ displayName: username });
+    successToastify("Registered successfully");
   } catch (error) {
     alert(
       "There exists an account with this email. Please login with your password or continue with Google!"
@@ -39,6 +41,7 @@ export const signIn = (email, password) => {
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
+      successToastify("Logged in successfully");
     })
     .catch((error) => {
       // var errorCode = error.code;
@@ -60,8 +63,11 @@ export const userObserver = async (setCurrentUser) => {
       setCurrentUser(null);
     }
   });
-  
 };
+
+/* export const updateProfile = (email,displayName) =>{
+  return firebase.auth.updateProfile({email:email,username:displayName})
+} */
 
 export const signUpProvider = () => {
   var provider = new firebase.auth.GoogleAuthProvider();
@@ -75,3 +81,4 @@ export const forgotPassword = (email) => {
 };
 
 export default firebaseApp;
+
