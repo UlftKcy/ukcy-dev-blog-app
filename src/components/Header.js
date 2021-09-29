@@ -21,7 +21,6 @@ const useStylesHeader = makeStyles((theme) => ({
   container: {
     maxWidth: "40rem",
     height: "20rem",
-    color: "#ffff",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-around",

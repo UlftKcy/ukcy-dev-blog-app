@@ -1,4 +1,4 @@
-import { useState , useContext} from "react";
+import { useState, useContext } from "react";
 import { useHistory } from "react-router";
 import {
   Grid,
@@ -15,36 +15,44 @@ import { AuthContext } from "../context/AuthContext";
 
 const useStylesBlog = makeStyles((theme) => ({
   wrapper: {
-    margin: "auto",
-    height: "calc(100vh - 19.0625rem)",
-    textAlign: "center",
     maxWidth: "30rem",
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
   avatar: {
-    margin: "1rem auto",
+    marginBottom: 20,
     backgroundColor: theme.palette.primary.main,
   },
   newblog: {
-    margin: "1rem",
+    marginBottom: 20,
   },
 }));
 
 const UpdateBlog = () => {
-  const { selectedCard } = useContext(AuthContext)
-  const [title, setTitle] = useState(selectedCard.title);
-  const [image, setImage] = useState(selectedCard.image);
-  const [content, setContent] = useState(selectedCard.content);
-  
+  const { selectedCard } = useContext(AuthContext);
+
+  const [updateBlog,setUpdateBlog] = useState({
+    id:selectedCard.id,
+    title:selectedCard.title,
+    image:selectedCard.image,
+    content:selectedCard.content,
+  })
   const history = useHistory();
   const classes = useStylesBlog();
 
+  const handleChangeBlog = (e) => {
+    const { name, value } = e.target;
+    setUpdateBlog({ ...updateBlog, [name]: value })
+  }
+
   const handleUpdate = (e) => {
     e.preventDefault();
-    const id = selectedCard.id;
-    const newCard = {id,title, image, content };
+    editHandler(updateBlog);
     history.goBack();
-    editHandler(newCard);
-    console.log(newCard)
+    console.log(updateBlog)
   };
   return (
     <Container className={classes.wrapper}>
@@ -55,7 +63,7 @@ const UpdateBlog = () => {
         Update Blog
       </Typography>
 
-      <form onSubmit={handleUpdate}>
+      
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <TextField
@@ -64,8 +72,8 @@ const UpdateBlog = () => {
               label="Title"
               variant="outlined"
               fullWidth
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={updateBlog?.title}
+              onChange={handleChangeBlog}
             />
           </Grid>
           <Grid item xs={12}>
@@ -75,8 +83,8 @@ const UpdateBlog = () => {
               label="Image"
               variant="outlined"
               fullWidth
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
+              value={updateBlog?.image}
+              onChange={handleChangeBlog}
             />
           </Grid>
           <Grid item xs={12}>
@@ -88,17 +96,19 @@ const UpdateBlog = () => {
               rows={4}
               variant="outlined"
               fullWidth
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
+              value={updateBlog?.content}
+              onChange={handleChangeBlog}
             />
           </Grid>
           <Grid item xs={12}>
-            <Button type="submit" variant="contained" color="primary" fullWidth>
+            <Button
+            onClick={handleUpdate}
+            type="submit" variant="contained" color="primary" fullWidth>
               Update
             </Button>
           </Grid>
         </Grid>
-      </form>
+     
     </Container>
   );
 };

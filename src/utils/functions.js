@@ -30,14 +30,14 @@ export const useFetch = () => {
   return { blogCardList, isLoading };
 };
 
-export const editHandler = (newBlog) => {
-  const blogCardRef = firebase.database().ref("blogCard").child(newBlog.id);
-  blogCardRef.update(newBlog);
+export const editHandler = (updateBlog) => {
+  const updateBlogRef = firebase.database().ref("blogCard").child(updateBlog.id);
+  updateBlogRef.update(updateBlog);
   successToastify("Updated Successfully")
 };
 
 export const deleteHandler = (id) => {
-  const blogCardRef = firebase.database().ref("blogCard").child(id);
-  blogCardRef.remove();
+  const updateBlogRef = firebase.database().ref("blogCard").child(id);
+  updateBlogRef.remove();
   successToastify("Deleted successfully");
 };

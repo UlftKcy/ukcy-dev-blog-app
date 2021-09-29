@@ -18,7 +18,7 @@ const AppRouter = () => {
         <Route path="/register" component={Register} />
         <Route path="/newblog" component={NewBlog} />
         <Route path="/blog/:blogId" component={BlogDetail} />
-        <Route path="/updateBlog" component={UpdateBlog} />
+        <Route path="/updateBlog/:blogId" component={UpdateBlog} />
         <Route path="/profile" component={Profile} />
       </Switch>
     </Router>

@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import {
@@ -24,7 +24,9 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 const BlogDetail = () => {
   const history = useHistory();
   const { isLoading } = useFetch();
-  const { selectedCard, currentUser } = useContext(AuthContext);
+  const { selectedCard,currentUser } = useContext(AuthContext);
+  // const {id,author,title,image,content} = selectedCard;
+  console.log(selectedCard)
   
   return (
     <Grid sx={{ flexGrow: 1 }} container>
@@ -38,7 +40,7 @@ const BlogDetail = () => {
         </Grid>
       ) : (
         <Grid item xs={12}>
-          <Grid container justifyContent="space-around" spacing={8}>
+          <Grid container justifyContent="space-around">
             <Typography variant="h3" color="secondary" component="div">
               <Box sx={{ fontFamily: "Monospace", m: 3 }}>DETAILS</Box>
             </Typography>
@@ -93,7 +95,7 @@ const BlogDetail = () => {
                 color="primary"
                 variant="contained"
                 endIcon={<UpdateIcon />}
-                onClick={() => history.push("/updateBlog")}
+                onClick={() => history.push(`/updateBlog/${selectedCard?.id}`)}
               >
                 Update
               </Button>
