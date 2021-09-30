@@ -82,7 +82,7 @@ const BlogCards = ({ card }) => {
             fontSize: 20,
           }}
         >
-          {currentUser ? <AccountCircleIcon /> : ""}
+          <AccountCircleIcon />
           {card.author}
         </CardContent>
         <CardActions disableSpacing>
