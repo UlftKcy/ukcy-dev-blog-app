@@ -3,10 +3,9 @@ import { userObserver } from "../utils/firebase";
 
 export const AuthContext = createContext();
 
-function AuthContextProvider(props) {
+function AuthContextProvider({children}) {
   const [currentUser, setCurrentUser] = useState();
-  const [selectedCard, setSelectedCard] = useState();
- 
+  const [blogDetail, setBlogDetail] = useState([]);
 
   useEffect(() => {
     userObserver(setCurrentUser);
@@ -17,11 +16,11 @@ function AuthContextProvider(props) {
       value={{
         currentUser,
         setCurrentUser,
-        selectedCard,
-        setSelectedCard
+        blogDetail,
+        setBlogDetail,
       }}
     >
-      {props.children}
+      {children}
     </AuthContext.Provider>
   );
 }

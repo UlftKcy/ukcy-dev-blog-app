@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, memo } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navbar() {
+const Navbar = () => {
   const history = useHistory();
   const classes = useStyles();
   const { currentUser } = useContext(AuthContext);
@@ -104,3 +104,4 @@ export default function Navbar() {
     </Container>
   );
 }
+export default memo(Navbar);

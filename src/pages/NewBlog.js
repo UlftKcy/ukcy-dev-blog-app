@@ -44,15 +44,13 @@ const NewBlog = () => {
     content: "",
     favorite_count: "",
     comment_count: "",
+    date: new Date().toLocaleDateString(),
   });
   const handleNewBlog = (e) => {
-    // const name = e.target.name;
-    // const value = e.target.value;
     const { name, value } = e.target;
     /* const favorite_count = e.target.value;
     const comment_count = e.target.value; */
     setNewBlog({ ...newBlog, [name]: value });
-    // console.log(newBlog)
   };
 
   const handleSubmit = (e) => {
@@ -78,6 +76,7 @@ const NewBlog = () => {
               id="outlined-basic"
               label="Title"
               variant="outlined"
+              required
               fullWidth
               value={newBlog.title}
               onChange={handleNewBlog}
@@ -89,6 +88,7 @@ const NewBlog = () => {
               id="outlined-basic"
               label="Image URL"
               variant="outlined"
+              required
               fullWidth
               value={newBlog.image}
               onChange={handleNewBlog}
@@ -102,6 +102,7 @@ const NewBlog = () => {
               multiline
               rows={4}
               variant="outlined"
+              required
               fullWidth
               value={newBlog.content}
               onChange={handleNewBlog}

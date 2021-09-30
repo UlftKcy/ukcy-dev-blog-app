@@ -5,7 +5,7 @@ import firebase from "./firebase";
 export const addCard = (newBlog) => {
   const blogCardRef = firebase.database().ref("blogCard");
   blogCardRef.push(newBlog);
-  successToastify("Added successfully")
+  successToastify("Added successfully");
 };
 
 export const useFetch = () => {
@@ -14,7 +14,7 @@ export const useFetch = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    const blogCardRef = firebase.database()?.ref("blogCard");
+    const blogCardRef = firebase.database().ref("blogCard");
     blogCardRef.on("value", (snapshot) => {
       const blogCards = snapshot.val();
 
@@ -24,16 +24,15 @@ export const useFetch = () => {
       }
       setBlogCardList(blogCardArray);
       setIsLoading(false);
-      // console.log(blogCardArray)
     });
   }, []);
   return { blogCardList, isLoading };
 };
 
-export const editHandler = (updateBlog) => {
-  const updateBlogRef = firebase.database().ref("blogCard").child(updateBlog.id);
-  updateBlogRef.update(updateBlog);
-  successToastify("Updated Successfully")
+export const editHandler = (id, blogUpdate) => {
+  const updateBlogRef = firebase.database().ref("blogCard").child(id);
+  updateBlogRef.update(blogUpdate);
+  successToastify("Updated Successfully");
 };
 
 export const deleteHandler = (id) => {
