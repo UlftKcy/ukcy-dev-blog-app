@@ -69,11 +69,15 @@ export const userObserver = async (setCurrentUser) => {
   return firebase.auth.updateProfile({email:email,username:displayName})
 } */
 
-export const signUpProvider = () => {
+export const signUpProvider = async () => {
   var provider = new firebase.auth.GoogleAuthProvider();
-  provider.setCustomParameters({ prompt: "select_account" });
-  firebase.auth().signInWithPopup(provider);
-};
+  provider.setCustomParameters({
+      prompt : 'select_account'
+    });
+
+  firebase.auth()
+    .signInWithPopup(provider)
+}
 
 export const forgotPassword = (email) => {
   firebase.auth().sendPasswordResetEmail(email);
