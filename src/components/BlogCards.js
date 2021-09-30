@@ -25,14 +25,14 @@ const BlogCards = ({ card }) => {
       <Card
         style={{
           maxWidth: 345,
-          minHeight: "100%",
+          height: "100%",
           display: "grid",
         }}
       >
         <CardHeader
           style={{
             width: "100%",
-            minHeight: "15vh",
+            height: "15vh",
             backgroundImage:
               "linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%)",
           }}
@@ -42,7 +42,7 @@ const BlogCards = ({ card }) => {
         <CardMedia
           style={{
             width: "100%",
-            minHeight: "30vh",
+            height: "30vh",
             objectFit: "cover",
           }}
           image={card.image}
@@ -56,6 +56,7 @@ const BlogCards = ({ card }) => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
+            alignItems:"center",
           }}
         >
           <Typography variant="body2" color="text.secondary">
@@ -65,6 +66,7 @@ const BlogCards = ({ card }) => {
           </Typography>
           <Link to={currentUser ? `/blog/${card.id}` : "/login"}>
             <Button
+              
               variant="contained"
               color="primary"
               size="small"
