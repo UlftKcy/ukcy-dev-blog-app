@@ -1,9 +1,8 @@
 import { Container, makeStyles } from "@material-ui/core";
 import { Avatar, Typography, TextField, Grid, Button } from "@material-ui/core";
 import PersonIcon from "@material-ui/icons/Person";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-
 
 const useStylesProfile = makeStyles({
   wrapper: {
@@ -25,15 +24,16 @@ const useStylesProfile = makeStyles({
 
 const Profile = () => {
   const classes = useStylesProfile();
-  const { currentUser, setCurrentUser } = useContext(AuthContext);
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setCurrentUser({ ...currentUser, [name]: value });
+  const { currentUser } = useContext(AuthContext);
+  const innitialStates = {
+    username: currentUser?.displayName,
+    email: currentUser?.email,
   };
-  const handleProfileSubmit = (e) => {
-    e.preventDefault();
-    // updateProfile(currentUser.email,currentUser.displayName)
-  };
+  const [currentProfile, setCurrentProfile] = useState(innitialStates);
+
+  useEffect(() => {
+    setCurrentProfile(innitialStates);
+  }, [innitialStates]);
 
   return (
     <Container maxWidth="md" className={classes.wrapper}>
@@ -41,7 +41,7 @@ const Profile = () => {
         <PersonIcon />
       </Avatar>
       <Typography className={classes.login} variant="h4">
-        Manage Profile
+        Your Profile
       </Typography>
 
       <form>
@@ -54,8 +54,7 @@ const Profile = () => {
               fullWidth
               required
               placeholder="Email"
-              value={currentUser?.email}
-              onChange={handleInputChange}
+              value={currentProfile.email}
             />
           </Grid>
           <Grid item xs={12}>
@@ -65,21 +64,9 @@ const Profile = () => {
               type="text"
               fullWidth
               required
-              placeholder="userName(optional)"
-              value={currentUser?.displayName}
-              onChange={handleInputChange}
+              placeholder="userName"
+              value={currentProfile.username}
             />
-          </Grid>
-          <Grid item xs={12}>
-            <Button
-              onClick={handleProfileSubmit}
-              type="submit"
-              variant="contained"
-              color="primary"
-              fullWidth
-            >
-              Save
-            </Button>
           </Grid>
         </Grid>
       </form>

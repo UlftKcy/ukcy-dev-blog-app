@@ -54,7 +54,7 @@ const UpdateBlog = () => {
         return blogCardList[id];
       }
     }
-  }, [blogCardList]);
+  }, [blogCardList,blogId]);
 
   useEffect(() => {
     setNewBlog(res);

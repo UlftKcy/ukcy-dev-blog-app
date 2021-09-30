@@ -29,11 +29,11 @@ const BlogDetail = () => {
 
   useEffect(() => {
     for (const id in blogCardList) {
-      if (blogCardList[id].id == blogId) {
+      if (blogCardList[id].id === blogId) {
         setBlogDetail(blogCardList[id]);
       }
     }
-  }, [blogCardList]);
+  }, [blogId,setBlogDetail,blogCardList]);
 
   const updateBlogDetail = () => {
     history.push(`/updateBlog/${blogId}`);
