@@ -65,10 +65,6 @@ export const userObserver = async (setCurrentUser) => {
   });
 };
 
-/* export const updateProfile = (email,displayName) =>{
-  return firebase.auth.updateProfile({email:email,username:displayName})
-} */
-
 export const signUpProvider = async () => {
   var provider = new firebase.auth.GoogleAuthProvider();
   provider.setCustomParameters({
