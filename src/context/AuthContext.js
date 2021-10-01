@@ -3,7 +3,7 @@ import { userObserver } from "../utils/firebase";
 
 export const AuthContext = createContext();
 
-function AuthContextProvider({children}) {
+function AuthContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [blogDetail, setBlogDetail] = useState([]);
 
@@ -11,18 +11,14 @@ function AuthContextProvider({children}) {
     userObserver(setCurrentUser);
   }, []);
 
-  return (
-    <AuthContext.Provider
-      value={{
-        currentUser,
-        setCurrentUser,
-        blogDetail,
-        setBlogDetail,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
+  const values = {
+    currentUser,
+    setCurrentUser,
+    blogDetail,
+    setBlogDetail,
+  };
+
+  return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 }
 
 export default AuthContextProvider;

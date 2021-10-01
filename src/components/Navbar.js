@@ -1,13 +1,13 @@
 import React, { useContext, memo } from "react";
+import { useHistory } from "react-router";
+import { signOut } from "../utils/firebase";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { ButtonGroup, Container, Link } from "@material-ui/core";
-import { useHistory } from "react-router";
 import { AuthContext } from "../context/AuthContext";
-import { signOut } from "../utils/firebase";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 
 const useStyles = makeStyles((theme) => ({
@@ -62,7 +62,7 @@ const Navbar = () => {
               <code>{"<UlfetKacay/>"}</code>
             </Link>
           </Typography>
-          {currentUser ? (
+          {currentUser?.email ? (
             <ButtonGroup>
               <Button
                 color="primary"
@@ -103,5 +103,5 @@ const Navbar = () => {
       </AppBar>
     </Container>
   );
-}
+};
 export default memo(Navbar);

@@ -1,5 +1,7 @@
 import { useContext, useState } from "react";
 import { useHistory } from "react-router";
+import { AuthContext } from "../context/AuthContext";
+import { addCard } from "../utils/functions";
 import { v4 as uuidv4 } from "uuid";
 import {
   Grid,
@@ -11,8 +13,6 @@ import {
   Avatar,
 } from "@material-ui/core";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
-import { addCard } from "../utils/functions";
-import { AuthContext } from "../context/AuthContext";
 
 const useStylesBlog = makeStyles((theme) => ({
   wrapper: {
@@ -48,8 +48,6 @@ const NewBlog = () => {
   });
   const handleNewBlog = (e) => {
     const { name, value } = e.target;
-    /* const favorite_count = e.target.value;
-    const comment_count = e.target.value; */
     setNewBlog({ ...newBlog, [name]: value });
   };
 

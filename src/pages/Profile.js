@@ -1,8 +1,8 @@
-import { Container, makeStyles } from "@material-ui/core";
-import { Avatar, Typography, TextField, Grid, Button } from "@material-ui/core";
-import PersonIcon from "@material-ui/icons/Person";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { Container, makeStyles } from "@material-ui/core";
+import { Avatar, Typography, TextField, Grid } from "@material-ui/core";
+import PersonIcon from "@material-ui/icons/Person";
 
 const useStylesProfile = makeStyles({
   wrapper: {

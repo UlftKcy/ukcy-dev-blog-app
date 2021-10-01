@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Link, Typography } from "@material-ui/core";
 import { Paper } from "@material-ui/core";
-import { useHistory } from "react-router";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import GitHubIcon from "@material-ui/icons/GitHub";
 
@@ -73,8 +73,8 @@ const Header = () => {
         <Typography className={classes.heading} variant="h2">
           Create Your Blog Page
         </Typography>
-        <Typography className={classes.subcontent} variant="h6">
-          <Box>Create | Read | Update | Delete</Box>
+        <Typography className={classes.subcontent} variant="h6" component={"div"}>
+          Create | Read | Update | Delete
         </Typography>
 
         <Button

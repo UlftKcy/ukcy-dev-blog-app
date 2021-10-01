@@ -3,7 +3,7 @@ import "firebase/auth";
 import "firebase/database";
 import { successToastify } from "./customToastify";
 
-const devConfig  = {
+const devConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
   projectId: process.env.REACT_APP_PROJECT_ID,
@@ -13,7 +13,8 @@ const devConfig  = {
 };
 const prodConfig = {};
 
-const firebaseConfig = process.env.NODE_ENV === "development" ? devConfig : prodConfig;
+const firebaseConfig =
+  process.env.NODE_ENV === "development" ? devConfig : prodConfig;
 
 firebase.initializeApp(firebaseConfig);
 
@@ -28,6 +29,7 @@ export const createUser = async (email, password, username) => {
       .catch((error) => {
         // const errorCode = error.code;
         // const errorMessage = error.message;
+        console.log(error);
       });
 
     const currentUser = firebase.auth().currentUser;
@@ -51,6 +53,7 @@ export const signIn = (email, password) => {
     .catch((error) => {
       // var errorCode = error.code;
       // var errorMessage = error.message;
+      console.log(error);
       alert("The password is invalid or the user does not have a password!");
     });
 };
@@ -73,12 +76,11 @@ export const userObserver = async (setCurrentUser) => {
 export const signUpProvider = async () => {
   var provider = new firebase.auth.GoogleAuthProvider();
   provider.setCustomParameters({
-      prompt : 'select_account'
-    });
+    prompt: "select_account",
+  });
 
-  firebase.auth()
-    .signInWithPopup(provider)
-}
+  firebase.auth().signInWithPopup(provider);
+};
 
 export const forgotPassword = (email) => {
   firebase.auth().sendPasswordResetEmail(email);

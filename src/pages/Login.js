@@ -1,10 +1,17 @@
-import { Container, makeStyles } from "@material-ui/core";
-import { Avatar, Typography, TextField, Grid, Button } from "@material-ui/core";
+import {
+  Container,
+  makeStyles,
+  Avatar,
+  Typography,
+  TextField,
+  Grid,
+  Button,
+} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Form, Formik, useFormik, ErrorMessage } from "formik";
 import * as yup from "yup";
-import { signIn, signUpProvider, forgotPassword } from "../utils/firebase";
+import { signIn, signUpProvider } from "../utils/firebase";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 const useStylesLogin = makeStyles({
   wrapper: {

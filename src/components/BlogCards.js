@@ -56,17 +56,16 @@ const BlogCards = ({ card }) => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            alignItems:"center",
+            alignItems: "center",
           }}
         >
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant={"body2"}>
             {card.content.length < 250
               ? card.content
               : card.content?.slice(0, 250) + "..."}
           </Typography>
           <Link to={currentUser ? `/blog/${card.id}` : "/login"}>
             <Button
-              
               variant="contained"
               color="primary"
               size="small"

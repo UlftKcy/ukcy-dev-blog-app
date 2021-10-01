@@ -11,12 +11,8 @@ import {
   Container,
   Avatar,
   Typography,
-  /* InputAdornment,
-  IconButton, */
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-/* import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-import VisibilityIcon from "@material-ui/icons/Visibility"; */
 
 const stylesFunc = makeStyles({
   wrapper: {
