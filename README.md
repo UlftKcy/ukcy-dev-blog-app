@@ -72,7 +72,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ### Notes
 
 You can add additional functionalities to your app.
+
 .env/
+
 REACT_APP_API_KEY=
 
 REACT_APP_AUTH_DOMAIN=
