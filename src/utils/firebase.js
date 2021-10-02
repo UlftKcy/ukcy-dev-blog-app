@@ -12,22 +12,12 @@ const firebaseApp = firebase.initializeApp({
   appId: process.env.REACT_APP_APP_ID,
 });
 
+export default firebaseApp;
 
 export const createUser = async (email, password, username) => {
   try {
-    await firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((user) => {
-        // const displayName = username;
-      })
-      .catch((error) => {
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
-        console.log(error);
-      });
-
-    const currentUser = firebase.auth().currentUser;
+    await firebaseApp.auth().createUserWithEmailAndPassword(email, password);
+    const currentUser = firebaseApp.auth();
     await currentUser.updateProfile({ displayName: username });
     successToastify("Registered successfully");
   } catch (error) {
@@ -37,13 +27,12 @@ export const createUser = async (email, password, username) => {
   }
 };
 export const signIn = (email, password) => {
-  firebase
+  firebaseApp
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
-      successToastify("Logged in successfully");
     })
     .catch((error) => {
       // var errorCode = error.code;
@@ -54,11 +43,11 @@ export const signIn = (email, password) => {
 };
 
 export const signOut = () => {
-  firebase.auth().signOut();
+  firebaseApp.auth().signOut();
 };
 
 export const userObserver = async (setCurrentUser) => {
-  firebase.auth().onAuthStateChanged((user) => {
+  firebaseApp.auth().onAuthStateChanged((user) => {
     if (user) {
       setCurrentUser(user);
     } else {
@@ -74,12 +63,10 @@ export const signUpProvider = async () => {
     prompt: "select_account",
   });
 
-  firebase.auth().signInWithPopup(provider);
+  firebaseApp.auth().signInWithPopup(provider);
 };
 
 export const forgotPassword = (email) => {
-  firebase.auth().sendPasswordResetEmail(email);
+  firebaseApp.auth().sendPasswordResetEmail(email);
   alert("Please check your mail box!");
 };
-
-export default firebaseApp;

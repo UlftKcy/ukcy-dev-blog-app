@@ -1,3 +1,4 @@
+import { successToastify } from "../utils/customToastify";
 import {
   Container,
   makeStyles,
@@ -47,6 +48,7 @@ const Login = () => {
     console.log("values:", values);
     signIn(values.email, values.password);
     history.push("/");
+    successToastify("Logged in successfully");
   };
   const handleGoogleButtonClick = () => {
     signUpProvider();

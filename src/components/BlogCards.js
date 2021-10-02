@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import {
@@ -16,21 +16,10 @@ import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutline
 import ModeCommentOutlinedIcon from "@material-ui/icons/ModeCommentOutlined";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import SendIcon from "@material-ui/icons/Send";
-import { editHandler } from "../utils/functions";
 
 const BlogCards = ({ blog }) => {
   const { currentUser } = useContext(AuthContext);
-  /* const [favoriteCount, setFavoriteCount] = useState(""); */
-  const [selectedBlog,setSelectedBlog] = useState(blog);
 
- /*  const favoriteHandler = (blog) => {
-    setFavoriteCount(Number(favoriteCount + 1));
-    setSelectedBlog({[blog.favorite_count]:favoriteCount})
-    // editHandler(selectedBlog)
-    console.log(selectedBlog)
-  }; */
-
-  
   return (
     <Grid item>
       <Card
@@ -97,8 +86,7 @@ const BlogCards = ({ blog }) => {
         </CardContent>
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">
-            <FavoriteBorderOutlinedIcon /* onClick={()=>favoriteHandler(blog)} */ />
-            {/* {favoriteCount} */}
+            <FavoriteBorderOutlinedIcon />
           </IconButton>
           <IconButton aria-label="comment">
             <ModeCommentOutlinedIcon />
