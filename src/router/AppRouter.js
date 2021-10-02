@@ -7,6 +7,7 @@ import NewBlog from "../pages/NewBlog";
 import BlogDetail from "../pages/BlogDetail";
 import UpdateBlog from "../pages/UpdateBlog";
 import Profile from "../pages/Profile";
+import PrivateRouter from "./PrivateRouter";
 
 const AppRouter = () => {
   return (
@@ -16,11 +17,10 @@ const AppRouter = () => {
         <Route exact path="/" component={Dashboard} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
-
-        <Route path="/newblog" component={NewBlog} />
-        <Route path="/blog/:blogId" component={BlogDetail} />
-        <Route path="/updateBlog/:blogId" component={UpdateBlog} />
-        <Route path="/profile" component={Profile} />
+        <PrivateRouter path="/newblog" component={NewBlog} />
+        <PrivateRouter path="/blog/:blogId" component={BlogDetail} />
+        <PrivateRouter path="/updateBlog/:blogId" component={UpdateBlog} />
+        <PrivateRouter path="/profile" component={Profile} />
       </Switch>
     </Router>
   );
