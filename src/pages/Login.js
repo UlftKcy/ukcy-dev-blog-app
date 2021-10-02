@@ -45,10 +45,9 @@ const Login = () => {
   const history = useHistory();
 
   const onSubmit = (values) => {
-    console.log("values:", values);
     signIn(values.email, values.password);
-    history.push("/");
     successToastify("Logged in successfully");
+    history.push("/");
   };
   const handleGoogleButtonClick = () => {
     signUpProvider();

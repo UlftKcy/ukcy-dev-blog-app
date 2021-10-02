@@ -57,7 +57,7 @@ const UpdateBlog = () => {
         return blogCardList[id];
       }
     }
-  }, [blogCardList,blogId]);
+  }, [blogCardList, blogId]);
 
   useEffect(() => {
     setNewBlog(res);
@@ -71,8 +71,8 @@ const UpdateBlog = () => {
   const handleUpdate = (e) => {
     e.preventDefault();
     editHandler(res?.id, newBlog);
-    history.goBack();
     successToastify("Updated Successfully");
+    history.goBack();
   };
   return (
     <Container className={classes.wrapper}>

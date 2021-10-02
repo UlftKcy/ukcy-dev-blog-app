@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { deleteHandler, useFetch } from "../utils/functions";
+import { successToastify } from "../utils/customToastify";
 import {
   Grid,
   Card,
@@ -33,7 +34,7 @@ const BlogDetail = () => {
         setBlogDetail(blogCardList[id]);
       }
     }
-  }, [blogId,setBlogDetail,blogCardList]);
+  }, [blogId, setBlogDetail, blogCardList]);
 
   const updateBlogDetail = () => {
     history.push(`/updateBlog/${blogId}`);
@@ -41,6 +42,7 @@ const BlogDetail = () => {
 
   const deleteBlogHandler = () => {
     deleteHandler(blogId);
+    successToastify("Deleted successfully");
     history.push("/");
   };
 

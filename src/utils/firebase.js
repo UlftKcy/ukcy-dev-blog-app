@@ -1,7 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
-import { successToastify } from "./customToastify";
 
 const firebaseApp = firebase.initializeApp({
   apiKey: process.env.REACT_APP_API_KEY,
@@ -16,10 +15,19 @@ export default firebaseApp;
 
 export const createUser = async (email, password, username) => {
   try {
-    await firebaseApp.auth().createUserWithEmailAndPassword(email, password);
-    const currentUser = firebaseApp.auth();
+    await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+
+    const currentUser = firebase.auth().currentUser;
     await currentUser.updateProfile({ displayName: username });
-    successToastify("Registered successfully");
   } catch (error) {
     alert(
       "There exists an account with this email. Please login with your password or continue with Google!"

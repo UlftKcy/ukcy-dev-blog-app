@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import { addCard } from "../utils/functions";
-import { v4 as uuidv4 } from "uuid";
+import { successToastify } from "../utils/customToastify";
 import {
   Grid,
   TextField,
@@ -38,7 +38,6 @@ const NewBlog = () => {
   const history = useHistory();
   const [newBlog, setNewBlog] = useState({
     author: currentUser?.email,
-    id: uuidv4(),
     title: "",
     image: "",
     content: "",
@@ -54,6 +53,7 @@ const NewBlog = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addCard(newBlog);
+    successToastify("Added successfully");
     history.push("/");
   };
 

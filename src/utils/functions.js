@@ -5,7 +5,6 @@ import firebaseApp from "./firebase";
 export const addCard = (newBlog) => {
   const blogCardRef = firebaseApp.database().ref("blogCard");
   blogCardRef.push(newBlog);
-  successToastify("Added successfully");
 };
 
 export const useFetch = () => {
@@ -36,5 +35,4 @@ export const editHandler = (id, blogUpdate) => {
 export const deleteHandler = (id) => {
   const updateBlogRef = firebaseApp.database().ref("blogCard").child(id);
   updateBlogRef.remove();
-  successToastify("Deleted successfully");
 };
