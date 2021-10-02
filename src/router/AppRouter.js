@@ -16,6 +16,7 @@ const AppRouter = () => {
         <Route exact path="/" component={Dashboard} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
+
         <Route path="/newblog" component={NewBlog} />
         <Route path="/blog/:blogId" component={BlogDetail} />
         <Route path="/updateBlog/:blogId" component={UpdateBlog} />

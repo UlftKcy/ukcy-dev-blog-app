@@ -2,6 +2,7 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import { editHandler, useFetch } from "../utils/functions";
+import { successToastify } from "../utils/customToastify";
 import {
   Grid,
   TextField,
@@ -45,7 +46,9 @@ const UpdateBlog = () => {
     title: "",
     image: "",
     content: "",
-    updated_date: new Date().toLocaleDateString(),
+    favorite_count: "",
+    comment_count: "",
+    date: new Date().toLocaleDateString(),
   });
 
   const res = useMemo(() => {
@@ -69,6 +72,7 @@ const UpdateBlog = () => {
     e.preventDefault();
     editHandler(res?.id, newBlog);
     history.goBack();
+    successToastify("Updated Successfully");
   };
   return (
     <Container className={classes.wrapper}>

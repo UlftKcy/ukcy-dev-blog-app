@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import {
@@ -16,10 +16,21 @@ import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutline
 import ModeCommentOutlinedIcon from "@material-ui/icons/ModeCommentOutlined";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import SendIcon from "@material-ui/icons/Send";
+import { editHandler } from "../utils/functions";
 
-const BlogCards = ({ card }) => {
+const BlogCards = ({ blog }) => {
   const { currentUser } = useContext(AuthContext);
+  /* const [favoriteCount, setFavoriteCount] = useState(""); */
+  const [selectedBlog,setSelectedBlog] = useState(blog);
 
+ /*  const favoriteHandler = (blog) => {
+    setFavoriteCount(Number(favoriteCount + 1));
+    setSelectedBlog({[blog.favorite_count]:favoriteCount})
+    // editHandler(selectedBlog)
+    console.log(selectedBlog)
+  }; */
+
+  
   return (
     <Grid item>
       <Card
@@ -36,8 +47,8 @@ const BlogCards = ({ card }) => {
             backgroundImage:
               "linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%)",
           }}
-          title={card.title}
-          subheader={card.date}
+          title={blog.title}
+          subheader={blog.date}
         />
         <CardMedia
           style={{
@@ -45,9 +56,9 @@ const BlogCards = ({ card }) => {
             height: "30vh",
             objectFit: "cover",
           }}
-          image={card.image}
+          image={blog.image}
           component="img"
-          alt={card.title}
+          alt={blog.title}
         />
         <CardContent
           style={{
@@ -60,11 +71,11 @@ const BlogCards = ({ card }) => {
           }}
         >
           <Typography variant={"body2"}>
-            {card.content.length < 250
-              ? card.content
-              : card.content?.slice(0, 250) + "..."}
+            {blog.content.length < 250
+              ? blog.content
+              : blog.content?.slice(0, 250) + "..."}
           </Typography>
-          <Link to={currentUser ? `/blog/${card.id}` : "/login"}>
+          <Link to={currentUser ? `/blog/${blog.id}` : "/login"}>
             <Button
               variant="contained"
               color="primary"
@@ -82,11 +93,12 @@ const BlogCards = ({ card }) => {
           }}
         >
           <AccountCircleIcon />
-          {card.author}
+          {blog.author}
         </CardContent>
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">
-            <FavoriteBorderOutlinedIcon />
+            <FavoriteBorderOutlinedIcon /* onClick={()=>favoriteHandler(blog)} */ />
+            {/* {favoriteCount} */}
           </IconButton>
           <IconButton aria-label="comment">
             <ModeCommentOutlinedIcon />

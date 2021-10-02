@@ -24,8 +24,8 @@ const Dashboard = () => {
                 <Typography>Nothing Found!</Typography>
               </Grid>
             ) : (
-              blogCardList?.map((card, id) => (
-                <BlogCards key={id} card={card} />
+              blogCardList?.map((blog, id) => (
+                <BlogCards key={id} blog={blog} />
               ))
             )}
           </Grid>

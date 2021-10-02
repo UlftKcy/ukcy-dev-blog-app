@@ -29,10 +29,9 @@ export const useFetch = () => {
   return { blogCardList, isLoading };
 };
 
-export const editHandler = (id, blogUpdate) => {
-  const updateBlogRef = firebase.database().ref("blogCard").child(id);
+export const editHandler = (blogUpdate) => {
+  const updateBlogRef = firebase.database().ref("blogCard").child(blogUpdate.id);
   updateBlogRef.update(blogUpdate);
-  successToastify("Updated Successfully");
 };
 
 export const deleteHandler = (id) => {
