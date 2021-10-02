@@ -1,7 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
-import { errorToastify } from "./customToastify";
+import { successToastify, errorToastify } from "./customToastify";
 
 const firebaseApp = firebase.initializeApp({
   apiKey: process.env.REACT_APP_API_KEY,
@@ -22,12 +22,12 @@ export const createUser = async (email, password, username) => {
       .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        successToastify("Registered successfully");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
       });
-
     const currentUser = firebase.auth().currentUser;
     await currentUser.updateProfile({ displayName: username });
   } catch (error) {

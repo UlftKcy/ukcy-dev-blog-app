@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import { useFormik, ErrorMessage, Form, Formik } from "formik";
 import * as yup from "yup";
 import { createUser } from "../utils/firebase";
-import { successToastify } from "../utils/customToastify";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
@@ -57,7 +56,6 @@ const Register = () => {
   const history = useHistory();
   const onSubmit = (values) => {
     createUser(values.email, values.password, values.username);
-    successToastify("Registered successfully");
     history.push("/");
   };
 
