@@ -55,7 +55,6 @@ const initialValues = {
 
 const Register = () => {
   const history = useHistory();
-
   const onSubmit = (values) => {
     createUser(values.email, values.password, values.username);
     successToastify("Registered successfully");

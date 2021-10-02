@@ -11,7 +11,7 @@ import {
 import { useHistory } from "react-router-dom";
 import { Form, Formik, useFormik, ErrorMessage } from "formik";
 import * as yup from "yup";
-import { signIn, signUpProvider } from "../utils/firebase";
+import { signIn, signUpProvider, forgotPassword } from "../utils/firebase";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 const useStylesLogin = makeStyles({

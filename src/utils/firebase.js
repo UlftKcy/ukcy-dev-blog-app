@@ -1,10 +1,12 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
+import { errorToastify } from "./customToastify";
 
 const firebaseApp = firebase.initializeApp({
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
   projectId: process.env.REACT_APP_PROJECT_ID,
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
@@ -29,9 +31,7 @@ export const createUser = async (email, password, username) => {
     const currentUser = firebase.auth().currentUser;
     await currentUser.updateProfile({ displayName: username });
   } catch (error) {
-    alert(
-      "There exists an account with this email. Please login with your password or continue with Google!"
-    );
+    errorToastify("The mail address is already in use by another account.");
   }
 };
 export const signIn = (email, password) => {
@@ -46,7 +46,6 @@ export const signIn = (email, password) => {
       // var errorCode = error.code;
       // var errorMessage = error.message;
       console.log(error);
-      alert("The password is invalid or the user does not have a password!");
     });
 };
 
@@ -70,11 +69,5 @@ export const signUpProvider = async () => {
   provider.setCustomParameters({
     prompt: "select_account",
   });
-
   firebaseApp.auth().signInWithPopup(provider);
-};
-
-export const forgotPassword = (email) => {
-  firebaseApp.auth().sendPasswordResetEmail(email);
-  alert("Please check your mail box!");
 };

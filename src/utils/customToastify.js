@@ -13,3 +13,15 @@ export const successToastify = (msg) => {
     progress: undefined,
   });
 };
+export const errorToastify = (msg) => {
+  toast.error(msg, {
+    position: "bottom-right",
+    autoClose: 3000,
+    theme: "dark",
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+};
